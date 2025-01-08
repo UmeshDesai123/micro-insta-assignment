@@ -1,13 +1,20 @@
-import { AppDataSource } from "../data-source";
-import { User } from "../entity/User";
+// import { AppDataSource } from "../data-source";
+// import { User } from "../entity/User";
 
-const userRepo = AppDataSource.getRepository(User);
+import { User } from "../entity/User";
+import { Post } from "../entity/post";
+
+// const userRepo = AppDataSource.getRepository(User);
 
 export const createUser = async (name: string, mobileNumber: number, address: string) => {
-  const newUser = userRepo.create({ name, mobileNumber, address });
-  return await userRepo.save(newUser);
+  const newUser = await User.create({ name, mobileNumber, address });
+  return newUser.save();
+  // const newUser = userRepo.create({ name, mobileNumber, address });
+  // return await userRepo.save(newUser);
 };
 
 export const getAllUsers = async () => {
-  return await userRepo.find({ relations: ["posts"] });
+  const users = User.findAll({ include: [{ model: Post, as: "posts" }] });
+  return users;
+  // return await userRepo.find({ relations: ["posts"] });
 };

@@ -3,8 +3,8 @@ import { createPost, deletePost, getAllPosts, getPostsByUser, updatePost } from 
 
 export const createPostHandler = async (req: Request, res: Response) => {
   try {
-    const { title, description, images, userId } = req.body;
-    const post = await createPost(title, description, images, userId);
+    // const { title, description, images, userId } = req.body;
+    const post = await createPost(req.body);
     res.status(201).json(post);
   } catch (error) {
     res.status(400).json({ error: error.message });

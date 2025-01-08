@@ -16,5 +16,5 @@ export class UpdatePostDto {
 
   @IsNumber()
   @IsNotEmpty()
-  user: string;
+  userId: string;
 }
